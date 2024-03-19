@@ -1,15 +1,21 @@
-import React from "react";
-import { useRef, useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const LivePage = () => {
   const [listCamera, setListCamera] = useState([]);
+
   useEffect(() => {
-    axios.get(`http://localhost:30080/vst/api/v1/sensor/status`, {}).then((response) => {
-      console.log("Cameras", response.data);
-      setListCamera(response.data);
-    });
+    axios
+      .get(`http://localhost:30080/vst/api/v1/sensor/status`, {})
+      .then((response) => {
+        console.log("Cameras", response.data);
+        setListCamera(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching cameras:", error);
+      });
   }, []);
+
   return (
     <div style={styles.container}>
       {/* 2/3 of the page for the live video player */}
@@ -30,10 +36,10 @@ const LivePage = () => {
       <div style={styles.cameraListContainer}>
         <h2 style={styles.title}>Selected Cameras</h2>
         <ul style={styles.cameraList}>
-          <li>Camera 1</li>
-          <li>Camera 2</li>
-          <li>Camera 3</li>
-          {/* Add more cameras here */}
+          {/* Map through the listCamera array and render each camera */}
+          {listCamera.map((camera, index) => (
+            <li key={index}>{camera.name}</li>
+          ))}
         </ul>
       </div>
     </div>
