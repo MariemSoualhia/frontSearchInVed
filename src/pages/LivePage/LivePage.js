@@ -3,6 +3,7 @@ import axios from "axios";
 
 const LivePage = () => {
   const [listCamera, setListCamera] = useState([]);
+  const [selectedCamera, setSelectedCamera] = useState(null);
 
   useEffect(() => {
     axios
@@ -16,19 +17,31 @@ const LivePage = () => {
       });
   }, []);
 
+  const handleCameraClick = (camera) => {
+    setSelectedCamera(camera);
+  };
+
   return (
     <div style={styles.container}>
       {/* 2/3 of the page for the live video player */}
       <div style={styles.videoContainer}>
         <h2 style={styles.title}>Live Video Player</h2>
         <div style={styles.videoPlayer}>
-          {/* Insert your live video player component here */}
-          {/* Example video player */}
-          <div style={styles.video}>
-            {/* Replace the src with your actual video URL */}
-            {/* <video controls src="VIDEO_URL_HERE" style={styles.videoElement} /> */}
-            <p style={styles.videoPlaceholder}>Live Video Placeholder</p>
-          </div>
+          {/* Display the video player for the selected camera */}
+          {selectedCamera ? (
+            <div style={styles.video}>
+              {/* Replace the src with the actual video URL */}
+              <video
+                controls
+                src={selectedCamera.streamUrl}
+                style={styles.videoElement}
+              />
+            </div>
+          ) : (
+            <p style={styles.videoPlaceholder}>
+              Select a camera to view stream
+            </p>
+          )}
         </div>
       </div>
 
@@ -38,7 +51,16 @@ const LivePage = () => {
         <ul style={styles.cameraList}>
           {/* Map through the listCamera array and render each camera */}
           {listCamera.map((camera, index) => (
-            <li key={index}>{camera.name}</li>
+            <li
+              key={index}
+              onClick={() => handleCameraClick(camera)}
+              style={{
+                cursor: "pointer",
+                color: camera.state === "online" ? "green" : "red",
+              }}
+            >
+              {camera.cameraName} ({camera.state})
+            </li>
           ))}
         </ul>
       </div>
@@ -73,6 +95,11 @@ const styles = {
     background: "#f0f0f0",
     color: "#777",
     fontSize: "24px",
+  },
+  videoElement: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
   },
   videoPlaceholder: {
     textAlign: "center",
