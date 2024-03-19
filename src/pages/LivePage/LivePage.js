@@ -1,6 +1,15 @@
 import React from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
+import axios from "axios";
 
 const LivePage = () => {
+  const [listCamera, setListCamera] = useState([]);
+  useEffect(() => {
+    axios.get(`/event/People/Occupancy`, {}).then((response) => {
+      // console.log("Today Occupancy", response.data.counter);
+      // setOccupancy(response.data.counter);
+    });
+  }, []);
   return (
     <div style={styles.container}>
       {/* 2/3 of the page for the live video player */}
