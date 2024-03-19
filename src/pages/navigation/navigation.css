@@ -1,0 +1,78 @@
+/* Style for the navigation bar */
+.menu-horizontal {
+    background-color: #001529; /* Background color of the navigation */
+  }
+  
+  .menu-horizontal .ant-menu-item,
+  .menu-horizontal .ant-menu-submenu-title {
+    color: #ffffff; /* Text color for menu items */
+  }
+  
+  .menu-horizontal .ant-menu-item-selected,
+  .menu-horizontal .ant-menu-item-active,
+  .menu-horizontal .ant-menu-submenu-selected,
+  .menu-horizontal .ant-menu-submenu-active {
+    background-color: #1890ff; /* Background color for selected menu items */
+  }
+  
+  .menu-horizontal .ant-menu-item-icon,
+  .menu-horizontal .ant-menu-submenu-title > .anticon {
+    color: #ffffff; /* Icon color for menu items */
+  }
+  
+  .menu-horizontal .ant-menu-item:hover,
+  .menu-horizontal .ant-menu-submenu-title:hover {
+    background-color: #40a9ff; /* Background color on hover */
+  }
+  
+  .menu-horizontal .ant-menu-item > a {
+    color: #ffffff; /* Text color for links */
+  }
+  
+  /* Style for the logo and text */
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-img {
+    height: 32px;
+    margin-right: 8px;
+  }
+  
+  .logo-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  /* Media query for smaller screens */
+  @media screen and (max-width: 768px) {
+    .menu-horizontal {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+  
+    .menu-horizontal .ant-menu-item,
+    .menu-horizontal .ant-menu-submenu-title {
+      color: #ffffff;
+      margin: 5px;
+    }
+  
+    .logo-img {
+      height: 28px;
+    }
+  
+    .logo-text {
+      font-size: 16px;
+    }
+  }
+  
+  .sidebar-darkText2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #9E58FF; 
+  }
