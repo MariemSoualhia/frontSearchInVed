@@ -5,9 +5,9 @@ import axios from "axios";
 const LivePage = () => {
   const [listCamera, setListCamera] = useState([]);
   useEffect(() => {
-    axios.get(`/event/People/Occupancy`, {}).then((response) => {
-      // console.log("Today Occupancy", response.data.counter);
-      // setOccupancy(response.data.counter);
+    axios.get(`http://localhost:30080/vst/api/v1/sensor/status`, {}).then((response) => {
+      console.log("Cameras", response.data);
+      setListCamera(response.data);
     });
   }, []);
   return (
